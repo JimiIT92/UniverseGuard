@@ -13,12 +13,6 @@ import com.universeguard.utils.RegionUtils;
 
 public class EventSpawnItem {
 
-	/*@Listener
-	public void onItemSpawn(SpawnEntityEvent.ChunkLoad event) {
-		System.out.println(event.getCause());
-		event.setCancelled(true);
-	}*/
-	
 	@Listener
 	public void onItemSpawn(SpawnEntityEvent event) {
 		if(event.getCause().first(BlockSpawnCause.class).isPresent()) {

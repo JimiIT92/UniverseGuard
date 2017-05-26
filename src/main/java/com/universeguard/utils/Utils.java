@@ -38,7 +38,7 @@ public class Utils {
 	public static boolean isSelector(ItemStack stack) {
 		ItemStack selector = getSelector();
 		return stack.getItem() == selector.getItem() && 
-				stack.get(Keys.DISPLAY_NAME).get().compareTo(selector.get(Keys.DISPLAY_NAME).get()) == 0;
+				stack.get(Keys.DISPLAY_NAME).isPresent() && stack.get(Keys.DISPLAY_NAME).get().compareTo(selector.get(Keys.DISPLAY_NAME).get()) == 0;
 	}
 	
 	public static String locationToString(Location<World> l) {

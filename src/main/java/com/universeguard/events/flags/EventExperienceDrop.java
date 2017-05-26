@@ -14,7 +14,6 @@ public class EventExperienceDrop {
 	@Listener
 	public void onExperienceDrop(SpawnEntityEvent event) {
 		if(!event.getEntities().isEmpty()) {
-			System.out.println(event.getCause().root());
 			Entity e = event.getEntities().get(0);
 			if (e.getType() == EntityTypes.EXPERIENCE_ORB) {
 				Region r = RegionUtils.load(e.getLocation());
