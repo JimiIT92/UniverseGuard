@@ -79,8 +79,11 @@ public class RegionInfoExecutor implements CommandExecutor {
 				
 				temp.clear();
 				Utils.sendMessage(player, TextColors.AQUA, 		"|--Disabled commands:");
-				for(String cmd : r.getCommands()) {
-					temp.add(Text.of(TextColors.GREEN, cmd, ", "));
+				for(int i = 0; i < r.getCommands().size(); i++) {
+					if(i != r.getCommands().size() - 1)
+						temp.add(Text.of(TextColors.GREEN, r.getCommands().get(i), ", "));
+					else
+						temp.add(Text.of(TextColors.GREEN, r.getCommands().get(i)));
 				}
 				
 				Utils.sendMessage(player, temp.toArray());
