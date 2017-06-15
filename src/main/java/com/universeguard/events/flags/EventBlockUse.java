@@ -71,7 +71,7 @@ public class EventBlockUse {
 		if (e == EntityTypes.ITEM_FRAME || e == EntityTypes.ARMOR_STAND || e == EntityTypes.PAINTING) {
 			Region r = RegionUtils.load(event.getTargetEntity().getLocation());
 			if (r != null) {
-				//if (!RegionUtils.hasPermission(player, r))
+				if (!RegionUtils.hasPermission(player, r))
 					event.setCancelled(!r.getFlag("use"));
 			} else {
 				GlobalRegion gr = RegionUtils.loadGlobal(player.getWorld().getName());

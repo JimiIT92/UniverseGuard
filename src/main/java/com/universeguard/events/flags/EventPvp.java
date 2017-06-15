@@ -2,6 +2,7 @@ package com.universeguard.events.flags;
 
 import org.spongepowered.api.entity.Entity;
 import org.spongepowered.api.entity.EntityTypes;
+import org.spongepowered.api.entity.living.animal.Animal;
 import org.spongepowered.api.entity.living.monster.Monster;
 import org.spongepowered.api.entity.living.player.Player;
 import org.spongepowered.api.entity.projectile.arrow.Arrow;
@@ -120,6 +121,24 @@ public class EventPvp {
 					event.setCancelled(!r.getFlag("mobdamage"));
 			}
 
+		} else if(event.getTargetEntity() instanceof Monster) {
+			Region r = RegionUtils.load(event.getTargetEntity().getLocation());
+			if(r != null) {
+				event.setCancelled(!r.getFlag("mobpvp"));
+			} else {
+				GlobalRegion gr = RegionUtils.loadGlobal(event.getTargetEntity().getWorld().getName());
+				if(gr != null) 
+					event.setCancelled(!gr.getFlag("mobpvp"));
+			}
+		} else if(event.getTargetEntity() instanceof Animal) {
+			Region r = RegionUtils.load(event.getTargetEntity().getLocation());
+			if(r != null) {
+				event.setCancelled(!r.getFlag("animalspvp"));
+			} else {
+				GlobalRegion gr = RegionUtils.loadGlobal(event.getTargetEntity().getWorld().getName());
+				if(gr != null) 
+					event.setCancelled(!gr.getFlag("animalspvp"));
+			}
 		}
 	}
 	

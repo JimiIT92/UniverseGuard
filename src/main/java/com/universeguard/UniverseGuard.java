@@ -220,10 +220,12 @@ public class UniverseGuard {
 		
 		CommandSpec regionHelpSpec = CommandSpec.builder().description(Text.of("Help"))
 				.executor(new RegionHelpExecutor())
+				.arguments(GenericArguments.optional(GenericArguments.integer(Text.of("page"))))
 				.build();
 		
 		CommandSpec regionFlagHelpSpec = CommandSpec.builder().description(Text.of("Flags Help"))
 				.executor(new RegionFlagHelpExecutor())
+				.arguments(GenericArguments.optional(GenericArguments.integer(Text.of("page"))))
 				.build();
 		
 		CommandSpec regionCommandSpec = CommandSpec.builder().description(Text.of("Region command"))

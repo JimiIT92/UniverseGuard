@@ -25,8 +25,10 @@ public class RegionFlagExecutor implements CommandExecutor {
 				if(args.hasAny("flag") && args.hasAny("value")) {
 					String name = args.<String>getOne("flag").get();
 					boolean value = args.<Boolean>getOne("value").get();
-					r.setFlag(name, value);
-					Utils.sendMessage(player, TextColors.GREEN, "Region updated!");
+					if(r.setFlag(name, value))
+						Utils.sendMessage(player, TextColors.GREEN, "Region updated!");
+					else
+						Utils.sendMessage(player, TextColors.RED, "Invalid flag!");
 				}
 				else {
 					if(!args.hasAny("flag"))

@@ -69,6 +69,8 @@ public class Region {
 	private boolean invincible;
 	private boolean cactusdamage;
 	private boolean firedamage;
+	private boolean mobpvp;
+	private boolean animalspvp;
 	
 	
 	/*private boolean lightning;
@@ -218,17 +220,19 @@ public class Region {
 	public int getPriority() {
 		return this.priority;
 	}
-	public void setFlag(String flag, boolean value) {
+	public boolean setFlag(String flag, boolean value) {
 		Field[] fields = this.getClass().getDeclaredFields();
 		for (Field f : fields) {
 			if (f.getName().equalsIgnoreCase(flag))
 				try {
 					this.getClass().getDeclaredField(flag).setBoolean(this, value);
+					return true;
 				} catch (IllegalArgumentException | IllegalAccessException | NoSuchFieldException
 						| SecurityException e) {
 					e.printStackTrace();
 				}
 		}
+		return false;
 	}
 	
 	public boolean getFlag(String flag) {
