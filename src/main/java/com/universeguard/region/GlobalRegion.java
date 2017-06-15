@@ -42,6 +42,23 @@ public class GlobalRegion {
 	private boolean vehicledestroy;
 	private boolean leafdecay;
 	private boolean sendchat;
+	private boolean firespread;
+	private boolean potionsplash;
+	private boolean falldamage;
+	private boolean cantp;
+	private boolean canspawn;
+	private boolean hunger;
+	private boolean enderchests;
+	private boolean walldamage;
+	private boolean drown;
+	private boolean animals;
+	private boolean tntdamage;
+	private boolean otherexplosionsdamage;
+	private boolean invincible;
+	private boolean cactusdamage;
+	private boolean firedamage;
+	private boolean mobpvp;
+	private boolean animalspvp;
 	
 	/*private boolean firespread;
 	private boolean lavafire;
@@ -57,15 +74,7 @@ public class GlobalRegion {
 	private boolean vinegrowth;
 	private boolean receivechat;*/
 	
-	private boolean potionsplash;
-	private boolean falldamage;
-	private boolean cantp;
-	private boolean canspawn;
-	private boolean hunger;
-	private boolean enderchests;
-	private boolean walldamage;
-	private boolean drown;
-	private boolean animals;
+	
 	
 	public GlobalRegion(String w) {
 		this.world = w;

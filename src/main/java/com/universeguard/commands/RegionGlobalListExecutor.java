@@ -24,14 +24,21 @@ public class RegionGlobalListExecutor implements CommandExecutor {
 			Player player = (Player)src;
 			GlobalRegion r = RegionUtils.loadGlobal(player.getWorld().getName());
 			ArrayList<Text> temp = new ArrayList<Text>();
-			for (String s : GlobalRegion.getFlagNames()) {
-				if(r.getFlag(s))
-					temp.add(Text.of(TextColors.GREEN, s, ", "));
-				else
-					temp.add(Text.of(TextColors.RED, s, ", "));
+			for (int i = 0; i < GlobalRegion.getFlagNames().size(); i++) {
+				if(r.getFlag(GlobalRegion.getFlagNames().get(i))) {
+					if(i != GlobalRegion.getFlagNames().size() - 1)
+						temp.add(Text.of(TextColors.GREEN, GlobalRegion.getFlagNames().get(i), ", "));
+					else
+						temp.add(Text.of(TextColors.GREEN, GlobalRegion.getFlagNames().get(i)));
+				}
+				else{
+					if(i != GlobalRegion.getFlagNames().size() - 1)
+						temp.add(Text.of(TextColors.RED, GlobalRegion.getFlagNames().get(i), ", "));
+					else
+						temp.add(Text.of(TextColors.RED, GlobalRegion.getFlagNames().get(i)));
+				}
 			}
-			
-			
+
 			Utils.sendMessage(player, temp.toArray());
 			
 			return CommandResult.success();

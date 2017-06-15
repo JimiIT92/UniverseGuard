@@ -49,11 +49,20 @@ public class RegionInfoExecutor implements CommandExecutor {
 				Utils.sendMessage(player, TextColors.AQUA, 		"|--Flags:");
 				
 				ArrayList<Text> temp = new ArrayList<Text>();
-				for (String s : Region.getFlagNames()) {
-					if(r.getFlag(s))
-						temp.add(Text.of(TextColors.GREEN, s, ", "));
+				for (int i = 0; i < Region.getFlagNames().size(); i++) {
+					if(r.getFlag(Region.getFlagNames().get(i))) {
+						if(i != Region.getFlagNames().size() -1)
+							temp.add(Text.of(TextColors.GREEN, Region.getFlagNames().get(i), ", "));
+						else
+							temp.add(Text.of(TextColors.GREEN, Region.getFlagNames().get(i)));
+					}
 					else
-						temp.add(Text.of(TextColors.RED, s, ", "));
+					{
+						if(i != Region.getFlagNames().size() -1)
+							temp.add(Text.of(TextColors.RED, Region.getFlagNames().get(i), ", "));
+						else
+							temp.add(Text.of(TextColors.RED, Region.getFlagNames().get(i)));
+					}
 				}
 				
 				
