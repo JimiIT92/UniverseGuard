@@ -66,6 +66,8 @@ public class ConfigurationManager {
 				config.getNode("flags").getNode("invincible").setValue(false);
 				config.getNode("flags").getNode("cactusdamage").setValue(true);
 				config.getNode("flags").getNode("firedamage").setValue(true);
+				config.getNode("flags").getNode("mobpvp").setValue(true);
+				config.getNode("flags").getNode("animalspvp").setValue(true);
 				
 				/*config.getNode("flags").getNode("lightning").setValue(true);		
 				config.getNode("flags").getNode("pistons").setValue(true);				
