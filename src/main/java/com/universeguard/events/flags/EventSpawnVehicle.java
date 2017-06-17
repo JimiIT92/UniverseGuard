@@ -26,7 +26,7 @@ public class EventSpawnVehicle {
 						event.setCancelled(!r.getFlag("vehicleplace"));
 				} else {
 					if(!RegionUtils.hasGlobalPermission(p)) {
-						GlobalRegion gr = RegionUtils.loadGlobal(event.getTargetWorld().getName());
+						GlobalRegion gr = RegionUtils.loadGlobal(e.getEntity().getWorld().getName());
 						if(gr != null)
 							event.setCancelled(!gr.getFlag("vehicleplace"));
 					}

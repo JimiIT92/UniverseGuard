@@ -24,7 +24,7 @@ public class EventSpawnItem {
 					event.setCancelled(!r.getFlag("leafdecay"));
 				}
 				else {
-					GlobalRegion gr = RegionUtils.loadGlobal(event.getTargetWorld().getName());
+					GlobalRegion gr = RegionUtils.loadGlobal(b.getLocation().get().getExtent().getName());
 					if(gr != null)
 						event.setCancelled(!gr.getFlag("leafdecay"));
 				}

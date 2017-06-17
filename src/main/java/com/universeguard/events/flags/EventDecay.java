@@ -17,7 +17,7 @@ public class EventDecay {
 		}
 		else
 		{
-			GlobalRegion gr = RegionUtils.loadGlobal(e.getTargetWorld().getName());
+			GlobalRegion gr = RegionUtils.loadGlobal(e.getTransactions().get(0).getOriginal().getLocation().get().getExtent().getName());
 			if(gr != null)
 				e.setCancelled(!gr.getFlag("leafdecay"));
 		}

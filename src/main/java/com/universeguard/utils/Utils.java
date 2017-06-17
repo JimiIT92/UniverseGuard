@@ -5,7 +5,10 @@ import java.util.UUID;
 
 import org.spongepowered.api.Sponge;
 import org.spongepowered.api.data.key.Keys;
+import org.spongepowered.api.data.manipulator.mutable.item.EnchantmentData;
+import org.spongepowered.api.data.meta.ItemEnchantment;
 import org.spongepowered.api.entity.living.player.Player;
+import org.spongepowered.api.item.Enchantments;
 import org.spongepowered.api.item.ItemTypes;
 import org.spongepowered.api.item.inventory.ItemStack;
 import org.spongepowered.api.service.user.UserStorageService;
@@ -27,7 +30,12 @@ public class Utils {
 	public static ItemStack getSelector() {
 		ItemStack selector = ItemStack.builder().itemType(ItemTypes.STICK).build();
 		selector.offer(Keys.DISPLAY_NAME, Text.of(TextColors.LIGHT_PURPLE, "Region selector"));
-
+		EnchantmentData enchantmentData = selector.getOrCreate(EnchantmentData.class).get();
+		
+		enchantmentData.set(enchantmentData.enchantments().add(new ItemEnchantment(Enchantments.INFINITY, 1)));
+	
+		selector.offer(enchantmentData);
+		selector.offer(Keys.HIDE_ENCHANTMENTS, true);
 		return selector.createSnapshot().createStack();
 	}
 

@@ -19,7 +19,7 @@ public class EventSpawnEntity {
 				if (r != null) {
 					event.setCancelled(!r.getFlag("animals"));
 				} else {
-					GlobalRegion gr = RegionUtils.loadGlobal(event.getTargetWorld().getName());
+					GlobalRegion gr = RegionUtils.loadGlobal(event.getEntities().get(0).getLocation().getExtent().getName());
 					if(gr != null)
 						event.setCancelled(!gr.getFlag("animals"));
 				}
@@ -28,7 +28,7 @@ public class EventSpawnEntity {
 					if (r != null) {
 						event.setCancelled(!r.getFlag("mobs"));
 					} else {
-						GlobalRegion gr = RegionUtils.loadGlobal(event.getTargetWorld().getName());
+						GlobalRegion gr = RegionUtils.loadGlobal(event.getEntities().get(0).getLocation().getExtent().getName());
 						if(gr != null)
 							event.setCancelled(!gr.getFlag("mobs"));
 					}

@@ -4,6 +4,9 @@
         "name": "Universe Guard",
         "version": "1.0",
         "description": "A World Guard solution for Sponge",
+        "authorList": [
+            "Minehendrix"
+        ],
         "requiredMods": [
             "spongeapi@5.2.0-SNAPSHOT"
         ]

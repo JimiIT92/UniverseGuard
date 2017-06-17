@@ -41,9 +41,13 @@ public class RegionRemoveOwnerExecutor implements CommandExecutor {
 			if(r != null) {
 				if(args.hasAny("name")) {
 					UUID p = args.<Player>getOne("name").get().getUniqueId();
-					r.removeOwner(p);
-					RegionUtils.save(r);
-					Utils.sendMessage(player, TextColors.GREEN, args.<Player>getOne("name").get().getName(), " removed from region owners!");
+					if(r.getOwners().contains(p)) {
+						r.removeOwner(p);
+						RegionUtils.save(r);
+						Utils.sendMessage(player, TextColors.GREEN, args.<Player>getOne("name").get().getName(), " removed from region owners!");
+					}
+					else
+						Utils.sendMessage(player, TextColors.RED, args.<Player>getOne("name").get().getName(), " is not into the region owners!");
 				}
 				else {
 					Utils.sendMessage(player, TextColors.RED, "Please specify a name!");

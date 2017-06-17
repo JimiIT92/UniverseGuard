@@ -39,7 +39,7 @@ public class EventSpawnEnderPearl {
 
 				} else {
 					if (!RegionUtils.hasGlobalPermission(p)) {
-						GlobalRegion gr = RegionUtils.loadGlobal(event.getTargetWorld().getName());
+						GlobalRegion gr = RegionUtils.loadGlobal(e.getEntity().getWorld().getName());
 						if(gr != null) {
 							boolean b = !gr.getFlag("enderpearl");
 							if(b) {

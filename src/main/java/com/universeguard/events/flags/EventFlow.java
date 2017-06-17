@@ -18,7 +18,7 @@ import com.universeguard.utils.RegionUtils;
 public class EventFlow {
 	@Listener
 	public void onFlow(ChangeBlockEvent.Pre event) {
-		BlockSnapshot snapshot = event.getTargetWorld().createSnapshot(event.getLocations().get(0).getBlockX(), event.getLocations().get(0).getBlockY(), event.getLocations().get(0).getBlockZ());
+		BlockSnapshot snapshot = event.getLocations().get(0).getExtent().createSnapshot(event.getLocations().get(0).getBlockX(), event.getLocations().get(0).getBlockY(), event.getLocations().get(0).getBlockZ());
 		Location<World> loc = event.getLocations().get(event.getLocations().size()-1);
 		Region r = RegionUtils.load(loc);
 		Optional<MatterProperty> matter = snapshot.getState().getProperty(MatterProperty.class);
@@ -35,13 +35,13 @@ public class EventFlow {
 				if (snapshot.getState().getType() == BlockTypes.LAVA
 						|| snapshot.getState().getType() == BlockTypes.FLOWING_LAVA)
 				{
-					GlobalRegion gr = RegionUtils.loadGlobal(event.getTargetWorld().getName());
+					GlobalRegion gr = RegionUtils.loadGlobal(event.getLocations().get(0).getExtent().getName());
 					if(gr != null)
 						event.setCancelled(!gr.getFlag("lavaflow"));
 				}
 				else
 				{
-					GlobalRegion gr = RegionUtils.loadGlobal(event.getTargetWorld().getName());
+					GlobalRegion gr = RegionUtils.loadGlobal(event.getLocations().get(0).getExtent().getName());
 					if(gr != null)
 						event.setCancelled(!gr.getFlag("waterflow"));
 				}

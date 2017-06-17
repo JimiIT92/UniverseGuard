@@ -26,7 +26,7 @@ public class EventSpawnPotion {
 						event.setCancelled(!r.getFlag("potionsplash"));
 				} else {
 					if(!RegionUtils.hasGlobalPermission(p)) {
-						GlobalRegion gr = RegionUtils.loadGlobal(event.getTargetWorld().getName());
+						GlobalRegion gr = RegionUtils.loadGlobal(e.getEntity().getWorld().getName());
 						if(gr != null)
 							event.setCancelled(!gr.getFlag("potionsplash"));
 					}

@@ -41,9 +41,13 @@ public class RegionAddOwnerExecutor implements CommandExecutor {
 			if(r != null) {
 				if(args.hasAny("name")) {
 					UUID p = args.<Player>getOne("name").get().getUniqueId();
-					r.addOwner(p);
-					RegionUtils.save(r);
-					Utils.sendMessage(player, TextColors.GREEN, args.<Player>getOne("name").get().getName(), " added to region owners!");
+					if(!r.getOwners().contains(p)) {
+						r.addOwner(p);
+						RegionUtils.save(r);
+						Utils.sendMessage(player, TextColors.GREEN, args.<Player>getOne("name").get().getName(), " added to region owners!");
+					}
+					else
+						Utils.sendMessage(player, TextColors.RED, args.<Player>getOne("name").get().getName(), " is already into the region owners!");
 				}
 				else {
 					Utils.sendMessage(player, TextColors.RED, "Please specify a name!");

@@ -28,7 +28,7 @@ public class EventBlockPlace {
 				event.setCancelled(!r.getFlag("endermangrief"));
 			} else {
 				{
-					GlobalRegion gr = RegionUtils.loadGlobal(event.getTargetWorld().getName());
+					GlobalRegion gr = RegionUtils.loadGlobal(event.getTransactions().get(0).getOriginal().getLocation().get().getExtent().getName());
 					if(gr != null)
 						event.setCancelled(!gr.getFlag("endermangrief"));
 				}
@@ -40,7 +40,7 @@ public class EventBlockPlace {
 				event.setCancelled(!r.getFlag("firespread"));
 			} else {
 				{
-					GlobalRegion gr = RegionUtils.loadGlobal(event.getTargetWorld().getName());
+					GlobalRegion gr = RegionUtils.loadGlobal(event.getTransactions().get(0).getOriginal().getLocation().get().getExtent().getName());
 					if(gr != null)
 						event.setCancelled(!gr.getFlag("firespread"));
 				}
@@ -52,7 +52,7 @@ public class EventBlockPlace {
 				event.setCancelled(!r.getFlag("build"));
 			} else {
 				{
-					GlobalRegion gr = RegionUtils.loadGlobal(event.getTargetWorld().getName());
+					GlobalRegion gr = RegionUtils.loadGlobal(event.getTransactions().get(0).getOriginal().getLocation().get().getExtent().getName());
 					if(gr != null)
 						event.setCancelled(!gr.getFlag("build"));
 				}
