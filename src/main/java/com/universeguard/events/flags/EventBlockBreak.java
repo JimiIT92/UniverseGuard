@@ -66,12 +66,26 @@ public class EventBlockBreak {
 				!(event.getCause().root() instanceof Explosive)) {
 			Region r = RegionUtils.load(event.getTransactions().get(0).getOriginal().getLocation().get());
 			if (r != null) {
-				event.setCancelled(!r.getFlag("build"));
+				if(event.getTransactions().get(0).getOriginal().getState().getType() == BlockTypes.CHEST ||
+						event.getTransactions().get(0).getOriginal().getState().getType() == BlockTypes.TRAPPED_CHEST)
+					event.setCancelled(!r.getFlag("chests"));
+				else if(event.getTransactions().get(0).getOriginal().getState().getType() == BlockTypes.ENDER_CHEST)
+					event.setCancelled(!r.getFlag("enderchests"));
+				else
+					event.setCancelled(!r.getFlag("build"));
 			} else {
 				{
 					GlobalRegion gr = RegionUtils.loadGlobal(event.getTransactions().get(0).getOriginal().getLocation().get().getExtent().getName());
-					if (gr != null)
-						event.setCancelled(!gr.getFlag("build"));
+					if (gr != null) {
+						if(event.getTransactions().get(0).getOriginal().getState().getType() == BlockTypes.CHEST ||
+								event.getTransactions().get(0).getOriginal().getState().getType() == BlockTypes.TRAPPED_CHEST)
+							event.setCancelled(!gr.getFlag("chests"));
+						else if(event.getTransactions().get(0).getOriginal().getState().getType() == BlockTypes.ENDER_CHEST)
+							event.setCancelled(!gr.getFlag("enderchests"));
+						else
+							event.setCancelled(!gr.getFlag("build"));
+							
+					}
 				}
 			}
 		}
@@ -82,13 +96,28 @@ public class EventBlockBreak {
 	public void onBlockBreak(ChangeBlockEvent.Break event, @Root Player player) {
 		Region r = RegionUtils.load(player.getLocation());
 		if (r != null) {
-			if (!RegionUtils.hasPermission(player, r))
-				event.setCancelled(!r.getFlag("build"));
+			if (!RegionUtils.hasPermission(player, r)) {
+				if(event.getTransactions().get(0).getOriginal().getState().getType() == BlockTypes.CHEST ||
+						event.getTransactions().get(0).getOriginal().getState().getType() == BlockTypes.TRAPPED_CHEST)
+					event.setCancelled(!r.getFlag("chests"));
+				else if(event.getTransactions().get(0).getOriginal().getState().getType() == BlockTypes.ENDER_CHEST)
+					event.setCancelled(!r.getFlag("enderchests"));
+				else
+					event.setCancelled(!r.getFlag("build"));
+			}
+				
 		} else {
 			if (!RegionUtils.hasGlobalPermission(player)) {
 				GlobalRegion gr = RegionUtils.loadGlobal(player.getWorld().getName());
-				if (gr != null)
-					event.setCancelled(!gr.getFlag("enderdragonblockdamage"));
+				if (gr != null) {
+					if(event.getTransactions().get(0).getOriginal().getState().getType() == BlockTypes.CHEST ||
+							event.getTransactions().get(0).getOriginal().getState().getType() == BlockTypes.TRAPPED_CHEST)
+						event.setCancelled(!gr.getFlag("chests"));
+					else if(event.getTransactions().get(0).getOriginal().getState().getType() == BlockTypes.ENDER_CHEST)
+						event.setCancelled(!gr.getFlag("enderchests"));
+					else
+						event.setCancelled(!gr.getFlag("build"));
+				}
 			}
 		}
 	}
