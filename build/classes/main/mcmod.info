@@ -1,8 +1,8 @@
 [
     {
         "modid": "universeguard",
-        "name": "Universe Guard",
-        "version": "1.0",
+        "name": "UniverseGuard",
+        "version": "1.0.1",
         "description": "A World Guard solution for Sponge",
         "authorList": [
             "Minehendrix"

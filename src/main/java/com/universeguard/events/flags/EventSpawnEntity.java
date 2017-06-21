@@ -1,5 +1,6 @@
 package com.universeguard.events.flags;
 
+import org.spongepowered.api.entity.Item;
 import org.spongepowered.api.entity.living.animal.Animal;
 import org.spongepowered.api.entity.living.monster.Monster;
 import org.spongepowered.api.event.Listener;
@@ -23,8 +24,17 @@ public class EventSpawnEntity {
 					if(gr != null)
 						event.setCancelled(!gr.getFlag("animals"));
 				}
+			} else if (event.getEntities().get(0) instanceof Monster) {
+				
+					if (r != null) {
+						event.setCancelled(!r.getFlag("mobs"));
+					} else {
+						GlobalRegion gr = RegionUtils.loadGlobal(event.getEntities().get(0).getLocation().getExtent().getName());
+						if(gr != null)
+							event.setCancelled(!gr.getFlag("mobs"));
+					}
 			} else {
-				if (event.getEntities().get(0) instanceof Monster) {
+				if (!(event.getEntities().get(0) instanceof Item)) {
 					if (r != null) {
 						event.setCancelled(!r.getFlag("mobs"));
 					} else {
@@ -33,7 +43,6 @@ public class EventSpawnEntity {
 							event.setCancelled(!gr.getFlag("mobs"));
 					}
 				}
-				
 			}
 		}
 		
