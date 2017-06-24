@@ -21,7 +21,7 @@ public class Region {
 
 	private Location<World> pos1;
 	private Location<World> pos2;
-	private int dimension;
+	private String dimension;
 	private String world;
 	
 	private String name;
@@ -88,7 +88,7 @@ public class Region {
 	private boolean vinegrowth;
 	private boolean receivechat;*/
 
-	public Region(Location<World> p1, Location<World> p2, int d, String w) {
+	public Region(Location<World> p1, Location<World> p2, String d, String w) {
 		this.pos1 = p1;
 		this.pos2 = p2;
 		this.dimension = d;
@@ -103,7 +103,7 @@ public class Region {
 		initFlags();
 	}
 	
-	public Region(int x1, int y1, int z1, int x2, int y2, int z2, int d, String w) {
+	public Region(int x1, int y1, int z1, int x2, int y2, int z2, String d, String w) {
 		this(new Location<World>(Sponge.getServer().getWorld(w).get(), x1, y1,z1), new Location<World>(Sponge.getServer().getWorld(w).get(), x2, y2,z2), d, w);
 	}
 	
@@ -164,11 +164,11 @@ public class Region {
 		return this.pos2;
 	}
 	
-	public void setDimension(int d) {
+	public void setDimension(String d) {
 		this.dimension = d;
 	}
 	
-	public int getDimension() {
+	public String getDimension() {
 		return this.dimension;
 	}
 	

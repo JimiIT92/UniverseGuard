@@ -60,7 +60,7 @@ public class RegionUtils {
 		int z2 = Math.max(pos1.getBlockZ(), pos2.getBlockZ());
 		
 		return r.getWorld().equalsIgnoreCase(l.getExtent().getName())
-				&& r.getDimension() == Integer.valueOf(l.getExtent().getDimension().getType().getId())
+				&& r.getDimension().equals(l.getExtent().getDimension().getType().getId())
 				&& ((l.getBlockX() >= x1 && l.getBlockX() <= x2)
 				&& (l.getBlockY() >= y1 && l.getBlockY() <= y2)
 				&& (l.getBlockZ() >= z1 && l.getBlockZ() <= z2));
@@ -207,7 +207,7 @@ public class RegionUtils {
 		Location<World> spawn = new Location<World>(world, region.getNode("spawn").getNode("x").getInt(),
 				region.getNode("spawn").getNode("y").getInt(), region.getNode("spawn").getNode("z").getInt());
 
-		int d = region.getNode("dimension").getInt();
+		String d = region.getNode("dimension").getString();
 
 		String w = region.getNode("world").getString();
 
