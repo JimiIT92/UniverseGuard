@@ -30,13 +30,13 @@ public class EventRightClick {
 					else
 						l = player.getLocation();
 					if (!UniverseGuard.instance.pendings.containsKey(player)) {
-						Region r = new Region(null, l, player.getWorld().getDimension().getType(),
+						Region r = new Region(null, l, Integer.valueOf(player.getWorld().getDimension().getType().getId()),
 								player.getWorld().getName());
 						UniverseGuard.instance.pendings.put(player, r);
 					} else {
 						Region r = UniverseGuard.instance.pendings.get(player);
 						r.setPos2(l);
-						r.setDimension(player.getWorld().getDimension().getType());
+						r.setDimension(Integer.valueOf(player.getWorld().getDimension().getType().getId()));
 						r.setWorld(player.getWorld().getName());
 					}
 					Utils.sendMessage(player, TextColors.YELLOW, "Second point set to: ", l.getBlockX(), " ", l.getBlockY(), " ", l.getBlockZ());
@@ -60,13 +60,13 @@ public class EventRightClick {
 					else
 						l = player.getLocation();
 					if (!UniverseGuard.instance.pendings.containsKey(player)) {
-						Region r = new Region(null, l, player.getWorld().getDimension().getType(),
+						Region r = new Region(null, l, Integer.valueOf(player.getWorld().getDimension().getType().getId()),
 								player.getWorld().getName());
 						UniverseGuard.instance.pendings.put(player, r);
 					} else {
 						Region r = UniverseGuard.instance.pendings.get(player);
 						r.setPos2(l);
-						r.setDimension(player.getWorld().getDimension().getType());
+						r.setDimension(Integer.valueOf(player.getWorld().getDimension().getType().getId()));
 						r.setWorld(player.getWorld().getName());
 					}
 					Utils.sendMessage(player, TextColors.YELLOW, "Second point set to: ", l.getBlockX(), " ", l.getBlockY(), " ", l.getBlockZ());

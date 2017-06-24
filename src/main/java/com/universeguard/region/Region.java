@@ -5,11 +5,14 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.UUID;
 
+import org.spongepowered.api.Sponge;
 import org.spongepowered.api.entity.living.player.gamemode.GameMode;
 import org.spongepowered.api.entity.living.player.gamemode.GameModes;
 import org.spongepowered.api.world.DimensionType;
+import org.spongepowered.api.world.DimensionTypes;
 import org.spongepowered.api.world.Location;
 import org.spongepowered.api.world.World;
+import org.spongepowered.api.world.extent.Extent;
 
 import com.universeguard.utils.Utils;
 
@@ -18,7 +21,7 @@ public class Region {
 
 	private Location<World> pos1;
 	private Location<World> pos2;
-	private DimensionType dimension;
+	private int dimension;
 	private String world;
 	
 	private String name;
@@ -85,7 +88,7 @@ public class Region {
 	private boolean vinegrowth;
 	private boolean receivechat;*/
 
-	public Region(Location<World> p1, Location<World> p2, DimensionType d, String w) {
+	public Region(Location<World> p1, Location<World> p2, int d, String w) {
 		this.pos1 = p1;
 		this.pos2 = p2;
 		this.dimension = d;
@@ -98,6 +101,10 @@ public class Region {
 		teleport = this.pos1;
 		spawn = this.pos1;
 		initFlags();
+	}
+	
+	public Region(int x1, int y1, int z1, int x2, int y2, int z2, int d, String w) {
+		this(new Location<World>(Sponge.getServer().getWorld(w).get(), x1, y1,z1), new Location<World>(Sponge.getServer().getWorld(w).get(), x2, y2,z2), d, w);
 	}
 	
 	public void setGameMode(String value) {
@@ -157,11 +164,11 @@ public class Region {
 		return this.pos2;
 	}
 	
-	public void setDimension(DimensionType d) {
+	public void setDimension(int d) {
 		this.dimension = d;
 	}
 	
-	public DimensionType getDimension() {
+	public int getDimension() {
 		return this.dimension;
 	}
 	

@@ -9,8 +9,6 @@ import java.util.UUID;
 import org.spongepowered.api.Sponge;
 import org.spongepowered.api.entity.living.player.Player;
 import org.spongepowered.api.text.format.TextColors;
-import org.spongepowered.api.world.DimensionType;
-import org.spongepowered.api.world.DimensionTypes;
 import org.spongepowered.api.world.Location;
 import org.spongepowered.api.world.World;
 
@@ -62,7 +60,7 @@ public class RegionUtils {
 		int z2 = Math.max(pos1.getBlockZ(), pos2.getBlockZ());
 		
 		return r.getWorld().equalsIgnoreCase(l.getExtent().getName())
-				&& r.getDimension() == l.getExtent().getDimension().getType()
+				&& r.getDimension() == Integer.valueOf(l.getExtent().getDimension().getType().getId())
 				&& ((l.getBlockX() >= x1 && l.getBlockX() <= x2)
 				&& (l.getBlockY() >= y1 && l.getBlockY() <= y2)
 				&& (l.getBlockZ() >= z1 && l.getBlockZ() <= z2));
@@ -135,7 +133,7 @@ public class RegionUtils {
 		pos2.put("z", r.getPos2().getBlockZ());
 		region.getNode("pos2").setValue(pos2);
 
-		region.getNode("dimension").setValue(r.getDimension().getId());
+		region.getNode("dimension").setValue(r.getDimension());
 		region.getNode("world").setValue(r.getWorld());
 		region.getNode("priority").setValue(r.getPriority());
 		region.getNode("gamemode").setValue(r.getGameMode().getId());
@@ -209,18 +207,11 @@ public class RegionUtils {
 		Location<World> spawn = new Location<World>(world, region.getNode("spawn").getNode("x").getInt(),
 				region.getNode("spawn").getNode("y").getInt(), region.getNode("spawn").getNode("z").getInt());
 
-		DimensionType dimension;
-		String d = region.getNode("dimension").getString();
-		if (d.equalsIgnoreCase("minecraft:overworld"))
-			dimension = DimensionTypes.OVERWORLD;
-		else if (d.equalsIgnoreCase("minecraft:nether"))
-			dimension = DimensionTypes.NETHER;
-		else
-			dimension = DimensionTypes.THE_END;
+		int d = region.getNode("dimension").getInt();
 
 		String w = region.getNode("world").getString();
 
-		Region r = new Region(pos1, pos2, dimension, w);
+		Region r = new Region(pos1, pos2, d, w);
 
 		r.setName(name);
 		r.setPriority(region.getNode("priority").getInt());
