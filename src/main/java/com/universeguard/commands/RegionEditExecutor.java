@@ -27,7 +27,7 @@ public class RegionEditExecutor implements CommandExecutor {
 			String name = null;
 			if(args.hasAny(Text.of("name"))) {
 				name = args.<String>getOne("name").get();
-				r = RegionUtils.load(name);
+				r = RegionUtils.getByName(name);
 			}
 			else {
 				r = RegionUtils.load(player.getLocation());

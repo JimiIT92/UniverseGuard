@@ -42,7 +42,7 @@ public class RegionSpawnExecutor implements CommandExecutor {
 			
 			if(args.hasAny(Text.of("name"))) {
 				String name = args.<String>getOne("name").get();
-				r = RegionUtils.load(name);
+				r = RegionUtils.getByName(name);
 				if(r != null) {
 					if(RegionUtils.hasPermission(player, r)) {
 						player.setLocation(r.getSpawn());

@@ -29,7 +29,7 @@ public class RegionCommandExecutor implements CommandExecutor {
 			else {
 				if (args.hasAny(Text.of("region"))) {
 					name = args.<String>getOne("region").get();
-					r = RegionUtils.load(name);
+					r = RegionUtils.getByName(name);
 				} else {
 					r = RegionUtils.load(player.getLocation());
 				}

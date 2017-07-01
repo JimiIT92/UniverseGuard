@@ -37,7 +37,7 @@ public class RegionUtils {
 
 			for (File file : files) {
 				if (file.exists()) {
-					Region r = load(file.getName().substring(0, file.getName().indexOf(".json")));
+					Region r = getByName(file.getName().substring(0, file.getName().indexOf(".json")));
 					if (r != null)
 						regions.add(r);
 				}
@@ -177,7 +177,7 @@ public class RegionUtils {
 		}
 	}
 
-	public static Region load(String name) {
+	public static Region getByName(String name) {
 		File file = new File("config/universeguard/regions/" + name + ".json");
 		if (!file.exists()) {
 			return null;
@@ -194,53 +194,58 @@ public class RegionUtils {
 		}
 
 		ConfigurationNode region = root.getNode(name);
-		World world = Sponge.getGame().getServer().getWorld(region.getNode("world").getString()).get();
-		Location<World> pos1 = new Location<World>(world, region.getNode("pos1").getNode("x").getInt(),
-				region.getNode("pos1").getNode("y").getInt(), region.getNode("pos1").getNode("z").getInt());
+		if(Sponge.getServer().getWorld(region.getNode("world").getString()).isPresent()) {
+			World world = Sponge.getServer().getWorld(region.getNode("world").getString()).get();
+			Location<World> pos1 = new Location<World>(world, region.getNode("pos1").getNode("x").getInt(),
+					region.getNode("pos1").getNode("y").getInt(), region.getNode("pos1").getNode("z").getInt());
 
-		Location<World> pos2 = new Location<World>(world, region.getNode("pos2").getNode("x").getInt(),
-				region.getNode("pos2").getNode("y").getInt(), region.getNode("pos2").getNode("z").getInt());
+			Location<World> pos2 = new Location<World>(world, region.getNode("pos2").getNode("x").getInt(),
+					region.getNode("pos2").getNode("y").getInt(), region.getNode("pos2").getNode("z").getInt());
 
-		Location<World> teleport = new Location<World>(world, region.getNode("teleport").getNode("x").getInt(),
-				region.getNode("teleport").getNode("y").getInt(), region.getNode("teleport").getNode("z").getInt());
+			Location<World> teleport = new Location<World>(world, region.getNode("teleport").getNode("x").getInt(),
+					region.getNode("teleport").getNode("y").getInt(), region.getNode("teleport").getNode("z").getInt());
 
-		Location<World> spawn = new Location<World>(world, region.getNode("spawn").getNode("x").getInt(),
-				region.getNode("spawn").getNode("y").getInt(), region.getNode("spawn").getNode("z").getInt());
+			Location<World> spawn = new Location<World>(world, region.getNode("spawn").getNode("x").getInt(),
+					region.getNode("spawn").getNode("y").getInt(), region.getNode("spawn").getNode("z").getInt());
 
-		String d = region.getNode("dimension").getString();
+			String d = region.getNode("dimension").getString();
 
-		String w = region.getNode("world").getString();
+			String w = region.getNode("world").getString();
+			
 
-		Region r = new Region(pos1, pos2, d, w);
 
-		r.setName(name);
-		r.setPriority(region.getNode("priority").getInt());
-		r.setGameMode(region.getNode("gamemode").getString());
-		r.setTeleport(teleport);
-		r.setSpawn(spawn);
+			Region r = new Region(pos1, pos2, d, w);
 
-		for (int i = 0; i < r.getAllFlags().size(); i++) {
-			r.setFlag(Region.getFlagNames().get(i), region.getNode("flags").getNode(Region.getFlagNames().get(i)).getBoolean());
+			r.setName(name);
+			r.setPriority(region.getNode("priority").getInt());
+			r.setGameMode(region.getNode("gamemode").getString());
+			r.setTeleport(teleport);
+			r.setSpawn(spawn);
+
+			for (int i = 0; i < r.getAllFlags().size(); i++) {
+				r.setFlag(Region.getFlagNames().get(i), region.getNode("flags").getNode(Region.getFlagNames().get(i)).getBoolean());
+			}
+
+			ArrayList<UUID> owners = new ArrayList<UUID>();
+			for (int i = 0; i < region.getNode("owners").getChildrenList().size(); i++) {
+				String s = region.getNode("owners").getChildrenList().get(i).getString();
+				UUID id = UUID.fromString(s);
+				owners.add(id);
+			}
+
+			r.setOwners(owners);
+			
+			ArrayList<String> commands = new ArrayList<String>();
+			for (int i = 0; i < region.getNode("commands").getChildrenList().size(); i++) {
+				String s = region.getNode("commands").getChildrenList().get(i).getString();
+				commands.add(s);
+			}
+			
+			r.setCommands(commands);
+
+			return r;
 		}
-
-		ArrayList<UUID> owners = new ArrayList<UUID>();
-		for (int i = 0; i < region.getNode("owners").getChildrenList().size(); i++) {
-			String s = region.getNode("owners").getChildrenList().get(i).getString();
-			UUID id = UUID.fromString(s);
-			owners.add(id);
-		}
-
-		r.setOwners(owners);
-		
-		ArrayList<String> commands = new ArrayList<String>();
-		for (int i = 0; i < region.getNode("commands").getChildrenList().size(); i++) {
-			String s = region.getNode("commands").getChildrenList().get(i).getString();
-			commands.add(s);
-		}
-		
-		r.setCommands(commands);
-
-		return r;
+		return null;
 	}
 	
 	public static void delete(Player p, String name) {
@@ -253,6 +258,13 @@ public class RegionUtils {
 		}
 		else
 			Utils.sendMessage(p, TextColors.RED, "Can't find the region ", name, "!");
+	}
+	
+	public static void delete(String name) {
+		File file = new File("config/universeguard/regions/" + name + ".json");
+		if (file.exists()) {
+			file.delete();
+		}
 	}
 	
 	public static void delete(Player p, Location<World> l) {
