@@ -72,7 +72,7 @@ import com.universeguard.utils.Utils;
 import ninja.leaping.configurate.commented.CommentedConfigurationNode;
 import ninja.leaping.configurate.loader.ConfigurationLoader;
 
-@Plugin(id = "universeguard", name = "UniverseGuard", version = "1.0.4", description="A World Guard solution for Sponge", authors = "Minehendrix")
+@Plugin(id = "universeguard", name = "UniverseGuard", version = "1.0.5", description="A World Guard solution for Sponge", authors = "Minehendrix")
 public class UniverseGuard {
 
 	public HashMap<Player, Region> pendings = new HashMap<Player, Region>();

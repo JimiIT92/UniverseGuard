@@ -23,16 +23,15 @@ public class RegionListExecutor implements CommandExecutor {
 		if(src instanceof Player) {
 			Player player = (Player)src;
 			ArrayList<Text> regions = new ArrayList<Text>();
+			Utils.sendMessage(player, TextColors.YELLOW, "--------------------Regions saved--------------------");
 			for(Region r : RegionUtils.getAllRegions()) {
-				Utils.sendMessage(player, TextColors.YELLOW, "--------------------Regions saved--------------------");
 				regions.add(Text.of(r.getOwners().contains(player.getUniqueId()) ? TextColors.GOLD : TextColors.RESET, r.getName(), ","));
-				Utils.sendMessage(player, TextColors.YELLOW, "-----------------------------------------------------");
 			}
 			if(regions.isEmpty())
 				Utils.sendMessage(player, TextColors.RED, "There are no regions!");
 			else
 				Utils.sendMessage(player, regions.toArray());
-			
+			Utils.sendMessage(player, TextColors.YELLOW, "-----------------------------------------------------");
 			return CommandResult.success();
 		}
 		return CommandResult.empty();
